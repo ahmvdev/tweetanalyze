@@ -21,6 +21,12 @@ function Signup() {
         case "auth/invalid-email":
           setError("Invalid email or password");
           break;
+        case "auth/missing-password":
+          setError("Invalid email or password");
+          break;
+        case "auth/email-already-in-use":
+          setError("Email is already registered");
+          break;
         default:
           setError(err.message);
       }
@@ -34,12 +40,14 @@ function Signup() {
           type="email"
           placeholder="Email"
           className="max-w-sm bg-zinc-950"
+          required
           onChange={(e) => setEmail(e.target.value)}
         />
         <Input
           type="password"
           placeholder="Password"
           className="max-w-sm bg-zinc-950"
+          required
           onChange={(e) => setPassword(e.target.value)}
         />
         {error && <p className="text-red-900">{error}</p>}

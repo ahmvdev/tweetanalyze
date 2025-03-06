@@ -21,7 +21,8 @@ function MainLanding() {
   async function handleGoogle() {
     const provider = new GoogleAuthProvider();
     try {
-      const result = await signInWithPopup(auth, provider);
+      await signInWithPopup(auth, provider);
+      navigate("/dashboard");
     } catch (e) {
       setGoogleError(e.message);
     }
@@ -35,6 +36,9 @@ function MainLanding() {
       switch (err.code) {
         case "auth/invalid-email":
           setError("Invalid email or password");
+          break;
+        case "auth/invalid-credential":
+          setError("User does not exist");
           break;
         default:
           setError(err.message);
