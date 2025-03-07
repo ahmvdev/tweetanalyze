@@ -12,16 +12,8 @@ import { auth } from "@/lib/firebase";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import InputCard from "@/components/ui/inputcard";
-import {
-  Image,
-  FileText,
-  Scissors,
-  List,
-  Clock,
-  MapPin,
-  Bold,
-  Italic,
-} from "lucide-react";
+import { Image, FileText, MapPin, Bold, Italic } from "lucide-react";
+import ChartComparison from "./chart";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -96,15 +88,6 @@ function Dashboard() {
             <FileText size={16} />
           </button>
           <button className="text-gray-400 hover:text-gray-200">
-            <Scissors size={16} />
-          </button>
-          <button className="text-gray-400 hover:text-gray-200">
-            <List size={16} />
-          </button>
-          <button className="text-gray-400 hover:text-gray-200">
-            <Clock size={16} />
-          </button>
-          <button className="text-gray-400 hover:text-gray-200">
             <MapPin size={16} />
           </button>
           <button className="text-gray-400 hover:text-gray-200">
@@ -121,6 +104,7 @@ function Dashboard() {
         </div>
         <div className="p-4">
           <h2 className="text-xl font-bold mb-2">Cumulative Engagement</h2>
+          <ChartComparison />
         </div>
         <div className="p-4">
           <h2 className="text-xl font-bold mb-2">Statistical Confidence</h2>

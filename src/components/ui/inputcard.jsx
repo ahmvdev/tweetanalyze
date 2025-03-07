@@ -1,5 +1,4 @@
 import { useState } from "react";
-import tweetImg from "@/assets/tweet2.png";
 
 function InputCard({ placeholder, title, color = "blue" }) {
   const [text, setText] = useState("");
@@ -13,7 +12,7 @@ function InputCard({ placeholder, title, color = "blue" }) {
     <div className="flex flex-col last:border-r-0 border-r border-gray-800">
       <div className="p-2">
         <h1
-          className={`font-bold text-base ${underlineColor} border-b-2 inline-block pb-0.5 px-2`}
+          className={`font-bold text-xl ${underlineColor} border-b-2 inline-block pb-0.5 px-2`}
         >
           {title}
         </h1>
@@ -23,7 +22,7 @@ function InputCard({ placeholder, title, color = "blue" }) {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder={placeholder}
-          className="w-full bg-transparent text-white text-sm resize-none outline-none min-h-[80px]"
+          className="w-full bg-transparent text-white text-xl resize-none outline-none min-h-[80px]"
         />
       </div>
     </div>
