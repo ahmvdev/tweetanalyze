@@ -72,7 +72,7 @@ function MainLanding() {
           Login
         </Button>
         <Link to="/signup">
-          <Button className="w-full bg-black border-0 hover:cursor-pointer hover:bg-[#2a2a2a] ">
+          <Button className="w-full bg-neutral-900 border-0 hover:cursor-pointer hover:bg-[#2a2a2a] ">
             Don't have an account? Sign up
           </Button>
         </Link>
