@@ -1,6 +1,4 @@
-"use client";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +12,7 @@ import { useState, useEffect } from "react";
 import InputCard from "@/components/ui/inputcard";
 import { Image, FileText, MapPin, Bold, Italic } from "lucide-react";
 import ChartComparison from "./chart";
+import { analyzeTweet } from "@/lib/azure";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -41,13 +40,12 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen text-white">
-      <div className="max-w-6xl mx-auto px-4 md:px-6">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-2">
         <div className="p-2 grid justify-items-end">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar className="cursor-pointer h-8 w-8">
                 <AvatarImage src={user?.photoURL} />
-                <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48 border-0">
@@ -97,7 +95,10 @@ function Dashboard() {
             <Italic size={16} />
           </button>
           <div className="ml-auto flex items-center gap-2">
-            <button className="bg-white text-black font-bold rounded-full px-3 py-1 text-sm hover:cursor-pointer">
+            <button
+              onClick={analyzeTweet}
+              className="bg-white text-black font-bold rounded-full px-3 py-1 text-sm hover:cursor-pointer"
+            >
               Predict
             </button>
           </div>

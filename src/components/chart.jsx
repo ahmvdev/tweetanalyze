@@ -10,12 +10,12 @@ import {
 } from "recharts";
 
 const data = [
-  { value: 0, versionA: 400, versionB: 240 },
-  { value: 198, versionA: 300, versionB: 280 },
-  { value: 396, versionA: 500, versionB: 320 },
-  { value: 594, versionA: 280, versionB: 580 },
-  { value: 792, versionA: 590, versionB: 390 },
-  { value: 999, versionA: 350, versionB: 480 },
+  { value: 0, versionA: 0, versionB: 0 },
+  { value: 198, versionA: 220, versionB: 180 },
+  { value: 396, versionA: 410, versionB: 350 },
+  { value: 594, versionA: 590, versionB: 620 },
+  { value: 792, versionA: 800, versionB: 850 },
+  { value: 999, versionA: 950, versionB: 980 },
 ];
 
 const Card = ({ className, children }) => (
@@ -30,7 +30,7 @@ const CardContent = ({ className, children }) => (
   <div className={className}>{children}</div>
 );
 
-const ChartContainer = ({ className, config, children }) => (
+const ChartContainer = ({ className, children }) => (
   <div className={className}>{children}</div>
 );
 
@@ -44,15 +44,15 @@ function CustomTooltip({ active, payload, label }) {
   if (active && payload && payload.length) {
     return (
       <ChartTooltip>
-        <ChartTooltipContent className="bg-[#17181C] border border-[#2A2E31] text-[#E7E8E9]">
+        <ChartTooltipContent className="bg-[#17181C] border border-gray-700 text-gray-100 p-2 rounded">
           <div className="font-bold">{label}</div>
           <div className="flex flex-col gap-1 mt-1">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-[#1E9CF0] rounded-full"></div>
+              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
               <span>Version A: {payload[0].value}</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-[#00B87A] rounded-full"></div>
+              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
               <span>Version B: {payload[1].value}</span>
             </div>
           </div>
@@ -66,25 +66,25 @@ function CustomTooltip({ active, payload, label }) {
 
 function ChartComparison() {
   return (
-    <Card className="bg-[#17181C] rounded-[16px] p-1 mx-1 sm:mx-2">
+    <Card className="bg-[#17181C] rounded-xl p-1 mx-1 sm:mx-2">
       <CardHeader className="p-0">
         <div className="flex justify-center sm:justify-start gap-3 mb-3 mt-1 ml-3">
-          <div className="flex items-center w-[90px] sm:w-[100px] h-[36px] bg-[#17181C] border border-[#2A2E31] rounded-[8px] overflow-hidden">
-            <div className="w-[8px] h-[36px] bg-[#1E9CF0]"></div>
-            <span className="text-[#E7E8E9] font-roboto text-[14px] font-bold ml-2">
+          <div className="flex items-center w-24 sm:w-28 h-9 bg-[#17181C] border border-gray-700 rounded-lg overflow-hidden">
+            <div className="w-2 h-9 bg-blue-500"></div>
+            <span className="text-gray-100 font-medium text-sm ml-2">
               Version A
             </span>
           </div>
-          <div className="flex items-center w-[90px] sm:w-[100px] h-[36px] bg-[#17181C] border border-[#2A2E31] rounded-[8px] overflow-hidden">
-            <div className="w-[8px] h-[36px] bg-[#00B87A]"></div>
-            <span className="text-[#E7E8E9] font-roboto text-[14px] font-bold ml-2">
+          <div className="flex items-center w-24 sm:w-28 h-9 bg-[#17181C] border border-gray-700 rounded-lg overflow-hidden">
+            <div className="w-2 h-9 bg-green-500"></div>
+            <span className="text-gray-100 font-medium text-sm ml-2">
               Version B
             </span>
           </div>
         </div>
       </CardHeader>
       <CardContent className="p-0">
-        <div className="h-[180px] sm:h-[200px]">
+        <div className="h-48 sm:h-52">
           <ChartContainer
             className="h-full"
             config={{
