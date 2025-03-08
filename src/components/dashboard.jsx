@@ -17,6 +17,12 @@ import { analyzeTweet } from "@/lib/azure";
 function Dashboard() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [err, setErr] = useState("");
+
+  const resTweet = async () => {
+    const res = await analyzeTweet("tell me a one line joke");
+    console.log(res.choices[0].message.content);
+  };
 
   useEffect(() => {
     const unmount = onAuthStateChanged(auth, (currentUser) => {
@@ -96,13 +102,14 @@ function Dashboard() {
           </button>
           <div className="ml-auto flex items-center gap-2">
             <button
-              onClick={analyzeTweet}
+              onClick={resTweet}
               className="bg-white text-black font-bold rounded-full px-3 py-1 text-sm hover:cursor-pointer"
             >
               Predict
             </button>
           </div>
         </div>
+        {err && <p className="text-base text-red-900">{err}</p>}
         <div className="p-4">
           <h2 className="text-xl font-bold mb-2">Cumulative Engagement</h2>
           <ChartComparison />
