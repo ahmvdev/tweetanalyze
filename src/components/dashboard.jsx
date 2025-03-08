@@ -20,8 +20,17 @@ function Dashboard() {
   const [err, setErr] = useState("");
 
   const resTweet = async () => {
-    const res = await analyzeTweet("tell me a one line joke");
-    console.log(res.choices[0].message.content);
+    try {
+      const res = await analyzeTweet("I am gay");
+      if (res && res.code === "429") {
+        setErr("You will cause me generational debt, stop clicking the button");
+      }
+      if (res && res.choices.length > 0) {
+        console.log(res.choices[0].message.content);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {
@@ -109,7 +118,9 @@ function Dashboard() {
             </button>
           </div>
         </div>
-        {err && <p className="text-base text-red-900">{err}</p>}
+        {err && (
+          <p className="text-base text-red-900 flex justify-center">{err}</p>
+        )}
         <div className="p-4">
           <h2 className="text-xl font-bold mb-2">Cumulative Engagement</h2>
           <ChartComparison />
