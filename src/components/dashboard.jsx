@@ -21,7 +21,7 @@ function Dashboard() {
 
   const resTweet = async () => {
     try {
-      const res = await analyzeTweet("I am gay");
+      const res = await analyzeTweet("I am gay", "i am not gay");
       if (res && res.code === "429") {
         setErr("You will cause me generational debt, stop clicking the button");
       }
@@ -66,7 +66,7 @@ function Dashboard() {
             <DropdownMenuContent align="end" className="w-48 border-0">
               <DropdownMenuItem
                 onClick={handleLogout}
-                className="cursor-pointer bg-zinc-950 ring-0 text-white hover:text-white focus:text-white focus:bg-red-950 border-0 outline-none focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none"
+                className="cursor-pointer bg-[#0e0f11] ring-0  focus:bg-red-950 border-0 outline-none focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
