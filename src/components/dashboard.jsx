@@ -81,7 +81,12 @@ function Dashboard() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar className="cursor-pointer h-8 w-8">
-                <AvatarImage src={user?.photoURL} />
+                <AvatarImage
+                  src={
+                    user?.photoURL ||
+                    "https://www.w3schools.com/w3images/avatar2.png"
+                  }
+                />
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48 border-0">
