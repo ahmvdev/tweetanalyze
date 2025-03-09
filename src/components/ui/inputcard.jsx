@@ -1,8 +1,4 @@
-import { useState } from "react";
-
-function InputCard({ placeholder, title, color = "blue" }) {
-  const [text, setText] = useState("");
-
+function InputCard({ placeholder, title, color = "blue", value, onChange }) {
   const underlineColor =
     color === "blue"
       ? "text-blue-500 border-blue-500"
@@ -19,8 +15,8 @@ function InputCard({ placeholder, title, color = "blue" }) {
       </div>
       <div className="p-2">
         <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
+          value={value}
+          onChange={onChange}
           placeholder={placeholder}
           className="w-full bg-transparent text-white text-xl resize-none outline-none min-h-[80px]"
         />

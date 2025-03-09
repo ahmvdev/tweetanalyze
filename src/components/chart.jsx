@@ -9,15 +9,6 @@ import {
   YAxis,
 } from "recharts";
 
-const data = [
-  { value: 0, versionA: 0, versionB: 0 },
-  { value: 198, versionA: 220, versionB: 180 },
-  { value: 396, versionA: 410, versionB: 350 },
-  { value: 594, versionA: 590, versionB: 620 },
-  { value: 792, versionA: 800, versionB: 850 },
-  { value: 999, versionA: 950, versionB: 980 },
-];
-
 const Card = ({ className, children }) => (
   <div className={className}>{children}</div>
 );
@@ -64,7 +55,15 @@ function CustomTooltip({ active, payload, label }) {
   return null;
 }
 
-function ChartComparison() {
+function ChartComparison({ cumEngA, cumEngB }) {
+  const data = [
+    { value: 0, versionA: 0, versionB: 0 },
+    { value: 198, versionA: cumEngA * 0.2, versionB: cumEngB * 0.2 },
+    { value: 396, versionA: cumEngA * 0.4, versionB: cumEngB * 0.4 },
+    { value: 594, versionA: cumEngA * 0.6, versionB: cumEngB * 0.6 },
+    { value: 792, versionA: cumEngA * 0.8, versionB: cumEngB * 0.8 },
+    { value: 999, versionA: cumEngA, versionB: cumEngB },
+  ];
   return (
     <Card className="bg-[#17181C] rounded-xl p-1 mx-1 sm:mx-2">
       <CardHeader className="p-0">

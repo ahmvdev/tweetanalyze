@@ -18,15 +18,36 @@ function Dashboard() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [err, setErr] = useState("");
+  const [tweetOne, setTweetOne] = useState(
+    "built an ai app that leverages openai api to check tweets for virality"
+  );
+  const [tweetTwo, setTweetTwo] = useState("working with ai is pretty fun");
+  const [cumEngA, setCumEngA] = useState(0);
+  const [cumEngB, setCumEngB] = useState(0);
+  const [likes, setLikes] = useState(0);
+  const [comments, setComments] = useState(0);
+  const [retweets, setRetweets] = useState(0);
+  const [quotes, setQuotes] = useState(0);
 
   const resTweet = async () => {
     try {
-      const res = await analyzeTweet("I am gay", "i am not gay");
+      const res = await analyzeTweet(tweetOne, tweetTwo);
       if (res && res.code === "429") {
         setErr("You will cause me generational debt, stop clicking the button");
+        setTimeout(() => setErr(""), 5000);
       }
-      if (res && res.choices.length > 0) {
-        console.log(res.choices[0].message.content);
+      if (res) {
+        const woah = res.choices[0].message.content;
+        const resJson = JSON.parse(woah);
+        console.log(woah);
+        const resA = resJson.versiona.cumeng;
+        const resB = resJson.versionb.cumeng;
+        setCumEngB(resB);
+        setCumEngA(resA);
+        setLikes(resJson.versiona.likes);
+        setComments(resJson.versionb.comments);
+        setRetweets(resJson.versiona.retweets);
+        setQuotes(resJson.versionb.quotes);
       }
     } catch (e) {
       console.log(e);
@@ -89,8 +110,20 @@ function Dashboard() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-b border-gray-800">
-          <InputCard placeholder="tweet here" title="Version A" color="blue" />
-          <InputCard placeholder="tweet here" title="Version B" color="green" />
+          <InputCard
+            value={tweetOne}
+            placeholder="tweet here"
+            title="Version A"
+            color="blue"
+            onChange={(e) => setTweetOne(e.target.value)}
+          />
+          <InputCard
+            value={tweetTwo}
+            onChange={(e) => setTweetTwo(e.target.value)}
+            placeholder="tweet here"
+            title="Version B"
+            color="green"
+          />
         </div>
 
         <div className="flex items-center gap-3 p-2 border-b border-gray-800">
@@ -123,21 +156,23 @@ function Dashboard() {
         )}
         <div className="p-4">
           <h2 className="text-xl font-bold mb-2">Cumulative Engagement</h2>
-          <ChartComparison />
+          <ChartComparison cumEngA={cumEngA} cumEngB={cumEngB} />
         </div>
         <div className="p-4">
           <h2 className="text-xl font-bold mb-2">Statistical Confidence</h2>
           <div className="grid grid-cols-4 gap-4">
             {[
-              { label: "Likes", value: "0.0%" },
-              { label: "Comments", value: "0.0%" },
-              { label: "Retweets", value: "0.0%" },
-              { label: "Quotes", value: "0.0%" },
+              { label: "Likes", value: likes, version: "A" },
+              { label: "Comments", value: comments, version: "B" },
+              { label: "Retweets", value: retweets, version: "A" },
+              { label: "Quotes", value: quotes, version: "B" },
             ].map((metric) => (
               <div key={metric.label} className="bg-zinc-900/50 p-3 rounded">
                 <div className="text-gray-400 text-sm">{metric.label}</div>
                 <div className="text-xl font-bold">{metric.value}</div>
-                <div className="text-[10px] text-gray-500">Vers. ?</div>
+                <div className="text-[10px] text-gray-500">
+                  Version {metric.version}
+                </div>
               </div>
             ))}
           </div>
