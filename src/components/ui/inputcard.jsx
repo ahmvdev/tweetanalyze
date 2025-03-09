@@ -15,6 +15,7 @@ function InputCard({ placeholder, title, color = "blue", value, onChange }) {
       </div>
       <div className="p-2">
         <textarea
+          spellcheck="false"
           value={value}
           onChange={onChange}
           placeholder={placeholder}

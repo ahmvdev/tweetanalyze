@@ -7,8 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-azure.js
-firebase.js
+
 
 node_modules
 dist
